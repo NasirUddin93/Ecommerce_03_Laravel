@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Admin;
 return [
 
     /*
@@ -39,6 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            // 'provider' => 'admins',
         ],
     ],
 
@@ -64,6 +65,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        // 'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',

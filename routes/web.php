@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +36,20 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         if (auth()->user()->role === 'admin') {
-            return view('admin.dashboard');
+            return view('backend.admin.dashboard');
         }
-        return view('customer.dashboard');
+        return view('backend.customer.dashboard');
     })->name('dashboard');
 });
 
+    Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('categories', CategoryController::class);
+        Route::resource('products', ProductController::class);
+        Route::resource('customers', CustomerController::class);
+        Route::delete('product-images/{id}', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
+    });
+
+
+// Route::resource('categories', CategoryController::class);
 
 require __DIR__.'/auth.php';

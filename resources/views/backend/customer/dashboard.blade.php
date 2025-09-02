@@ -421,7 +421,7 @@
     </main>
 {{-- logout section  --}}
 <h1>Customer Dashboard</h1>
-<form method="POST" action="{{ route('logout') }}">
+<form method="POST" action="{{ route('logout') }}" onsubmit="return confirm('Are you sure you want to logout?');">
     @csrf
     <button type="submit">Logout</button>
 </form>
